@@ -1,0 +1,22 @@
+<%- include('../layouts/header'); -%>
+
+<%- include('../layouts/flash') %>
+<h1>hi admin</h1>
+
+<div class="row">
+  <div style="width:100px ;height:100px;" class="ms-3 col-md-3 border border-dark text-center">
+    <a class="align-middle" href="/admin/showUser">Users</a>
+  </div>
+  <div style="width:100px ;height:100px;" class="ms-3 col-md-3 border border-dark text-center">
+    <a class="align-middle" href="/admin/category/categories">category</a>
+  </div>
+  <div style="width:100px ;height:100px;" class="ms-3 col-md-3 border border-dark text-center">
+    <a class="align-middle" href="/admin/subCategory/showSubCategory">Sub Category</a>
+  </div>
+</div>
+ 
+<br><br><br>
+<form action="/admin/logout" method="post">
+  <button>logout</button>
+</form>
+  <%- include('../layouts/footer'); -%>

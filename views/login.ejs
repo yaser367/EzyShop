@@ -1,0 +1,58 @@
+<%- include('./layouts/header'); -%>
+
+<div class="row bg-dark g-0">
+ 
+  
+  <div class="col-md-12 d-flex flex-row-reverse">
+    <nav class="navbar bg-dark">
+      <div class="container-fluid ">
+        <div class="">
+
+        </div>
+        <a class="navbar-brand fs-6 text-light " href="/homePage">Home</a>
+        <a class="navbar-brand fs-6 text-light " href="/login">sign In</a>
+        <a class="navbar-brand fs-6 text-light " href="/register">Register</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="row shadow  mb-4 bg-body rounded g-0">
+  <div class="col-md-12">
+    
+   
+      <a class="navbar-brand" href="/homePage">
+          <img class="m-4" style="width:12% ;" src="/images/logo/ezyshop_logo.png" alt="Logo">
+      </a>
+  
+  
+  </div>
+</div>
+<div class="row">
+  <div style="height: 600px; background:rgb(243, 243, 243);" class="d-flex justify-content-center col-md-12">
+    
+    <div style="height:400px; width:450px;margin-top: 80px;" class=" shadow-lg p-3 mb-5 bg-body rounded">
+      <%- include('./layouts/flash'); -%>
+      <br><h4>Login Now</h4><br>
+      
+      <form action="/login" method="post">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" id="email" required>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password">
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+        
+      </form><br>
+      <p class="text-center"><b>Don't have an account?</b> <a href="/register">Register Now</a></p>
+    </div>
+  </div>
+</div>
+
+
+<%- include('./layouts/footer'); -%>

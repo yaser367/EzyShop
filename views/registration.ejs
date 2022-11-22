@@ -1,0 +1,108 @@
+<%- include('./layouts/header'); -%>
+
+<div class="row bg-dark g-0">
+ 
+  
+  <div class="col-md-12 d-flex flex-row-reverse">
+    <nav class="navbar bg-dark">
+      <div class="container-fluid ">
+        <div class="">
+
+        </div>
+        <a class="navbar-brand fs-6 text-light " href="/homePage">Home</a>
+        <a class="navbar-brand fs-6 text-light " href="/login">sign In</a>
+        <a class="navbar-brand fs-6 text-light " href="/register">Register</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="row shadow  mb-4 bg-body rounded g-0">
+  <div class="col-md-12">
+    
+      <a class="navbar-brand" href="/homePage">
+          <img class="m-4" style="width:12% ;" src="/images/logo/ezyshop_logo.png" alt="Logo">
+      </a>
+  
+  
+  </div>
+</div>
+<div class="row">
+  <div style="height: 780px; background:rgb(243, 243, 243);" class="d-flex justify-content-center col-md-12">
+   
+    <div style="height:680px; width:450px;margin-top: 80px;" class=" shadow-lg p-3 mb-5 bg-body rounded">
+      <br><h4>No Account? Register</h4><br>
+
+        <%- include('./layouts/flash'); -%>
+      
+      <form action="/register" method="post" novalidate class="validate-form">
+        <div class="mb-3">
+            <label for="name" class="form-label">name</label>
+            <input type="text" name="name" class="form-control" id="name" required  >
+            <!-- <div class="valid-feedback">
+                Looks Good!!
+            </div> -->
+            <div class="invalid-feedback">
+                Please choose a name.
+              </div>
+          </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" name="email" class="form-control" id="email" required minlength="3" maxlength="30" >
+          <div class="invalid-feedback">
+            Please choose a email.
+          </div>
+          <div class="mb-3">
+            <label for="mobile" class="form-label">Mobile Number</label>
+            <input type="number" name="mobile" class="form-control" id="mobile" required minlength="10" maxlength="10">
+            <div class="invalid-feedback">
+              Please choose a Mobile Number.
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" id="password"required minlength="3" maxlength="30">
+          <div class="invalid-feedback">
+            Please set a password.
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="conformPassword" class="form-label">Conform Password</label>
+          <input type="text" name="conformPassword" class="form-control" id="conformPassword" required minlength="3" maxlength="30">
+          <div class="invalid-feedback">
+            Enter Conformation Password.
+          </div>
+        </div>
+     
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </form><br>
+      <p class="text-center"><b>Already have an account?</b> <a href="/login">Login Now</a></p>
+    </div>
+  </div>
+</div>
+<script>
+  // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+'use strict'
+
+// Fetch all the forms we want to apply custom Bootstrap validation styles to
+const forms = document.querySelectorAll('.validate-form')
+
+// Loop over them and prevent submission
+Array.from(forms).forEach(form => {
+  form.addEventListener('submit', event => {
+    if (!form.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+
+    form.classList.add('was-validated')
+  }, false)
+})
+})()
+</script>
+
+<%- include('./layouts/footer'); -%>

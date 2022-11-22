@@ -1,0 +1,30 @@
+<%- include('../layouts/header'); -%>
+
+<%- include('../layouts/flash') %>
+<a href="/admin/subCategory/add" class="btn btn-primary m-2"> addCategory</a>
+<a href="/admin/dashboard" class="btn btn-primary m-2"> HOME</a>
+<table>
+  <thead>
+    <tr>
+      <th>subCategory</th>
+      <th>category</th>
+  
+      
+    </tr>
+  </thead>
+  <tbody>
+   <% if(catData.length > 0){ %> 
+      <% for(value of catData){ %> 
+    <tr>
+      <td><%= value.subCategory %> </td>
+      <td><%= value.subCategory.categories %> </td>
+
+    </tr>
+    
+    <% } %> 
+    <% } %> 
+   
+  </tbody>
+</table>
+
+<%- include('../layouts/footer'); -%>

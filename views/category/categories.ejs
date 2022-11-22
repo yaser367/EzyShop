@@ -1,0 +1,29 @@
+<%- include('../layouts/header'); -%>
+
+<%- include('../layouts/flash') %>
+<a href="/admin/category" class="btn btn-primary m-2"> addCategory</a>
+<a href="/admin/dashboard" class="btn btn-primary m-2"> HOME</a>
+<table>
+  <thead>
+    <tr>
+      <th>category</th>
+      <th>update</th>
+      <th>Delete</th>      
+    </tr>
+  </thead>
+  <tbody>
+   <% if(catData.length > 0){ %> 
+      <% for(value of catData){ %> 
+    <tr>
+      <td><%= value.category  %> </td>
+      <td><a href="/admin/category/edit?id=<%= value._id %>" class="btn btn-warning m-2"> Edit</a></td>
+      <td><a href="/admin/category/delete?id=<%= value._id %>" onclick="return confirm('Are you sure you want to delete this item?')" class="btn btn-danger m-2"> Delete</a></td>
+    </tr>
+    
+    <% } %> 
+    <% } %> 
+   
+  </tbody>
+  </table>
+
+<%- include('../layouts/footer'); -%>

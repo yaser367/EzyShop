@@ -1,0 +1,54 @@
+<%- include('../layouts/header'); -%>
+<%- include('../layouts/flash'); -%>
+<div class="row bg-secondary ">
+    <div class="row">
+        <div class=" d-flex justify-content-center">
+            <h1 class="pt-5 text-light"><b>Add Product</b></h1><br>
+            
+           </div>
+           <div class=" d-flex justify-content-center">
+            <a href="/admin/product/showProduct" class="btn btn-light btn-sm">back</a>
+           </div>
+    </div>
+    <div class="row">
+        <div class="p-3 d-flex justify-content-center ">
+           
+           </div>
+    </div>
+    <div class="row">
+        <div class=" pb-5 d-flex justify-content-center">
+            <div class="shadow-lg bg-body rounded bg-light d-flex justify-content-center" style="height:600px ; width:530px;">
+                
+                    <form action="/admin/product/add" method="post" enctype="multipart/form-data"><br>
+                        
+                        <input type="text" name="productName" placeholder="Enter Product Name" required><br><br>
+                        <label for="">
+                            <select name="category" id="">
+                                <option value="">select category</option>
+                                <% for(let values of category_data){ %>
+                                <option value="<%=values._id%>"><%=values.category%> </option>    
+                                <% } %> 
+                            </select>
+                        </label><br><br>
+                        <label for="">
+                            <select name="brand" id="">
+                                <option value="">select brand</option>
+                                <% for(let values of brand_data){ %>
+                                <option value="<%=values._id%>"><%=values.brandName%> </option>    
+                                <% } %> 
+                            </select>
+                        </label><br><br>   
+                        <input type="text" name="price" placeholder="Enter price" required><br><br>
+                        <input type="number" name="stock" placeholder="Enter stock details" required><br><br>
+                        <input type="file" name="image" id="" multiple><br><br>
+                        <textarea name="specifications" id="" cols="60" rows="7" placeholder="Enter Specifications.." required></textarea><br>
+                        <button type="submit">submit</button>
+                    </form>
+                    
+                </div>
+           </div>
+         
+    </div>
+</div>
+
+<%- include('../layouts/footer'); -%>

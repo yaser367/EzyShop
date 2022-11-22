@@ -1,0 +1,76 @@
+<%- include('../layouts/header'); -%>
+<%- include('../layouts/flash'); -%>
+<div class="row bg-secondary ">
+    <div class="row">
+        <div class="d-flex justify-content-center ">
+            <h1 class="pt-5 text-light"><b>Update Product</b></h1><br>
+           </div>
+      
+    </div>
+    <form action="/admin/product/update/<%=product_data._id%>?_method=PUT" method="post" enctype="multipart/form-data"><br>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="bg-light m-3" style="height:500px; width:600px;">
+                <label for="">Product Name</label><br>
+                <input type="text" name="productName" value="<%=product_data.productName%>"  id="">
+                <br><br><label for="">
+                    <select required name="category" id="">
+                        <option value="<%=product_data.category._id%>"><%=product_data.category.category%> </option>
+                        <% for(let values of category_data){ %>
+                        <option value="<%=values._id%>"><%=values.category%> </option>    
+                        <% } %> 
+                    </select><br><br>
+                    <select required name="brand" id="">
+                        <option value="<%=product_data.brand._id%>"><%=product_data.brand.brandName%> </option>
+                        <% for(let values of category_data){ %>
+                        <option value="<%=values._id%>"><%=values.category%> </option>    
+                        <% } %> 
+                    </select>
+                </label><br><br>
+                <label for="">price</label>
+                <br><input name="price" type="text" value="<%=product_data.price%> ">
+                </label><br><br>
+                <label for="">stock</label>
+                <br><input name="stock" type="number" value="<%=product_data.stock%>">
+                <br><br><input type="file" name="image" id="" multiple><br><br>
+                <textarea name="specifications" id="" cols="60" rows="4" placeholder="Enter Specifications.." required><%=product_data.specifications%> </textarea><br>
+
+            </div>
+            
+            
+        </div>
+        <div class="col-md-6">
+            <div class="bg-light m-3 " style="height:500px; width:600px;">
+                
+                <div style="width:100px ;height:100px; " class="card m-3 ">
+                    <%product_data.images.forEach(function(img,i){ %>
+                        <img style="width:100px ;height:100px; " src="<%=img.url%>" class="float-start" alt="">
+                        <div class="form-check-inline">
+                            <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                            <label for="image-<%=i%>">Delete?</label>
+                        </div>
+                        
+                        <% }) %> 
+                </div>
+                
+            </div>
+        </div>
+        <div class="row d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">submit</button>
+          </div>
+            </form>
+            <div class="row mb-5">
+                <a href="/admin/product/showProduct" class="btn btn-secondary ps-5">back</a>
+            </div>
+            
+        </div>
+
+    </div>
+   
+
+
+
+
+
+<%- include('../layouts/footer'); -%>

@@ -1,0 +1,51 @@
+
+<%- include('./layouts/header'); -%>
+
+<div class="row bg-dark g-0">
+ 
+  
+  <div class="col-md-12 d-flex flex-row-reverse">
+    <nav class="navbar bg-dark">
+      <div class="container-fluid ">
+        <div class="">
+
+        </div>
+        <a class="navbar-brand fs-6 text-light " href="/homePage">Home</a>
+        <a class="navbar-brand fs-6 text-light " href="/login">sign In</a>
+        <a class="navbar-brand fs-6 text-light " href="/register">Register</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
+<div class="row shadow  mb-4 bg-body rounded g-0">
+  <div class="col-md-12">
+    
+   
+      <a class="navbar-brand" href="/homePage">
+          <img class="m-4" style="width:12% ;" src="/images/logo/ezyshop_logo.png" alt="Logo">
+      </a>
+  
+  
+  </div>
+</div>
+<div class="row">
+  <div style="height: 600px; background:rgb(243, 243, 243);" class="d-flex justify-content-center col-md-12">
+    
+    <div style="height:320px; width:650px;margin-top: 80px;" class=" shadow-lg p-3 mb-5 bg-body rounded">
+        <%- include('./layouts/flash'); -%>
+      <br><h4>Enter Valid Otp</h4><br>
+      
+      <form action="/verifyotp" method="post">
+        <input type="hidden" name="hashedOtp" id="" value="<%= emailId.hashedOtp %>">
+        <input type="hidden" name="userId" id="" value="<%= emailId._id %>">
+        <label for="otp" class="form-label">OTP</label>
+        <input name="otp" class="form-control" type="text" placeholder="enter otp" required><br>
+        <button type="submit" class="btn btn-primary">sumbit</button>
+        </form><br>
+    </div>
+  </div>
+</div>
+
+
+<%- include('./layouts/footer'); -%>

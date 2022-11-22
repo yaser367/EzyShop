@@ -1,0 +1,19 @@
+<%- include('../layouts/header'); -%>
+
+<%- include('../layouts/flash') -%>
+
+<form action="/admin/subCategory/add" method="post">
+    <label for="">select category</label>
+       
+    <select style="width:300px ;" name="categoryId" id="" class="form-control" required>
+        <option value="">select category</option>
+        <% for( let values of catData){ %>
+            <option value="<%= values._id  %> "><%= values.category  %> </option>
+        <% } %> 
+    </select>
+    <br>
+<input name="subCategory" type="text" placeholder="Enter Sub category" required>
+<button type="submit">sumbit</button>
+</form>
+
+<%- include('../layouts/footer'); -%>
