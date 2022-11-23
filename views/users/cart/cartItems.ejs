@@ -139,9 +139,12 @@
                                     <% if(user){ %> 
                                         <a href="/wishlist/show?id=<%=user_details._id%>">
                                             <i class="lni lni-heart"></i>
+                                            <% if(wishlist){ %> 
                                             <% if(wishlist.length > 0 ){ %> 
                                             <span class="total-items"><%=wishlist.length  %></span>
                                             <% }else{ %>
+                                            <span class="total-items">0</span>
+                                            <% }}else{ %>
                                             <span class="total-items">0</span>
                                                 
                                                 <% } %> 
@@ -155,16 +158,20 @@
                                 </div>
                                 <div class="cart-items">
                                     <% if(user){ %> 
-                                    <a href="/cartItems/show?id=<%=user_details._id%>" class="main-btn">
-                                        <i class="lni lni-cart"></i>
-                                        <% if(cart.length > 0 ){%> 
-                                        <span class="total-items"><%=cart.length%></span>
-                                        <% }else{ %>
-                                        <span class="total-items">0</span>
-                                            
-                                            <% } %> 
-                                    </a>
+                                        <a href="/cartItems/show?id=<%=user_details._id%>" class="main-btn">
+                                            <i class="lni lni-cart"></i>
+                                            <% if(cart){ %> 
+                                            <% if(cart.length > 0 ){%> 
+                                            <span class="total-items"><%=cart.length%></span>
+                                            <% }else{ %>
+                                                <span class="total-items">0</span>
+                                                    
+                                                    <% }}else{ %>
+                                                <span class="total-items">0</span>
+                                                        <% } %> 
+                                        </a>
                                     <!-- Shopping Item -->
+                                    <% if(carts){ %> 
                                     <% if(carts.length > 0){ %> 
                                     <div class="shopping-item">
                                         <div class="dropdown-cart-header">
@@ -212,7 +219,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <% } %> 
+                                    <% }} %> 
                                     <% }else{ %> 
                                         <a href="/login" class="main-btn">
                                             <i class="lni lni-cart"></i>
@@ -365,6 +372,7 @@
         </div>
         <!-- End Breadcrumbs -->
 <section>
+    <% if(cart){ %> 
     <% if(cart.length > 0 ){ %>
     <div style=" background:rgb(237, 237, 237);" class="row">
         <h2 style="color: grey;" class="text-center p-3">Cart Items</h2>
@@ -468,11 +476,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body bg-secondary">
+            
             <% for(values of coupons){ %> 
             <div class="container mt-5 mb-5"> 
                 <div class="d-flex justify-content-center row"> 
                     <div class="col-md-6"> <div class="coupon p-2 bg-white"> 
                         <div class="row no-gutters"> 
+                            
                             <div class="col-md-5 border-right "> 
                                 <div class="d-flex flex-column align-items-center">
                                    <p class="fst-italic">Coupon: <span class="text-success fw-lighter"><%=values.couponName%></span></p>
@@ -490,6 +500,7 @@
                                 </div> 
                             </div> 
                         </div> 
+
                     </div> 
                 </div> 
             </div> 
@@ -534,7 +545,33 @@
        
     </div>
     </div>
-    <% }else{ %> 
+    <% }else{ %>
+        <div class="container-fluid ">
+            <div class="row bg-light">
+            
+               <div class="col-md-12">
+               
+                  
+                  
+                   <div class="card-body cart bg-light">
+                           <div class="col-sm-12 empty-cart-cls text-center">
+                               <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+                               <h3><strong>Your Cart is Empty</strong></h3>
+                               <h4>Add something to make me happy :)</h4>
+                               <a href="/homePage" class="btn btn-primary cart-btn-transform m-3" data-abc="true">continue shopping</a>
+                               
+                           
+                           </div>
+                   </div>
+           
+                   
+               
+               </div>
+            
+            </div>
+           
+           </div>
+    <% }}else{ %> 
         <div class="container-fluid ">
             <div class="row bg-light">
             

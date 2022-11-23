@@ -10,32 +10,43 @@ const showCart = async(req,res)=>{
     try {
       const user = req.session.isAuth
       const id = req.query.id;
+      let cart;
+      let carts;
+      let wishlist
       const cartdetails = await Cart.findOne({ userId:id }).populate({
         path: "userId",
         path: "cartItems",
         populate: { path: "productId" },
       });
-      const cart = cartdetails.cartItems
+      if(cartdetails){
+       cart = cartdetails.cartItems
+      }
       const cartdetail = await Cart.findOne({ userId:user }).populate({
         path: "userId",
         path: "cartItems",
         populate: { path: "productId" },
       });
-      const carts = cartdetail.cartItems.slice(0,2)
+      if(cartdetail){
+       carts = cartdetail.cartItems.slice(0,2)
+      }
     const wish = await Wishlist.findOne({ userId:user }).populate({
         path: "userId",
         path: "wishItems",
         populate: { path: "productId" },
       });
-
-      const wishlist = wish.wishItems
+      if(wish){
+       wishlist = wish.wishItems
+      }
       let total;
       let subtotal =0;
-      for(values of cart){
+      if(cart){
+        for(values of cart){
         
-        total = parseInt(values.quantity)*parseInt(values.productId.price)
-        subtotal +=total
-    }
+            total = parseInt(values.quantity)*parseInt(values.productId.price)
+            subtotal +=total
+        }
+      }
+ 
 
       const user_details = await User.findOne({ _id: req.session.isAuth });
       const cate = await categories.find()

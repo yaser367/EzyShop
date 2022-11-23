@@ -18,13 +18,16 @@ const showCheckout = async(req,res)=>{
       const id = req.session.isAuth
       const cate = await categories.find()
       const user = req.session.isAuth
+      let cart;
+      let carts;
+      let wishlist;
       const cartdetails = await Cart.findOne({ userId:id }).populate({
         path: "userId",
         path: "cartItems",
         populate: { path: "productId" },
       });
-    
-      const cart = cartdetails.cartItems
+   
+      cart = cartdetails.cartItems
       const discount = parseInt(cartdetails.discount)
 
       let total;
@@ -35,16 +38,19 @@ const showCheckout = async(req,res)=>{
         subtotal +=total
     }
     const totalAmount = subtotal-discount
+    carts = cartdetails.cartItems.slice(0,2)
+
+
 
       const address = user_details.address
-      const carts = cartdetails.cartItems.slice(0,2)
       const wish = await Wishlist.findOne({ userId:user }).populate({
       path: "userId",
       path: "wishItems",
       populate: { path: "productId" },
     });
-
-    const wishlist = wish.wishItems
+    if(wish){
+     wishlist = wish.wishItems
+    }
       
       res.render('checkoutPage',{cate,user_details,user,cart,address,total,subtotal,discount,totalAmount,carts,wishlist})
   
@@ -155,7 +161,7 @@ const orderSuccess = async(req,res)=>{
     const userId = req.session.isAuth
     const cate = await categories.find()
     const user = req.session.isAuth
-
+    let wishlist
     const cartdetails = await Cart.findOne({ userId:userId }).populate({
       path: "userId",
       path: "cartItems",
@@ -170,8 +176,9 @@ const orderSuccess = async(req,res)=>{
       path: "wishItems",
       populate: { path: "productId" },
     });
-
-    const wishlist = wish.wishItems
+    if(wish){
+     wishlist = wish.wishItems
+    }
     res.render('successOrder',{user_details,cate,user,cart,cart1,order,discount,carts,wishlist})
   } catch (error) {
     console.log(error)
@@ -203,22 +210,29 @@ const showOrders = async(req,res)=>{
     const user_details = await User.findOne({ _id: req.session.isAuth });
     const user = req.session.isAuth
     const cate = await categories.find()
+    let cart
+    let carts
+    let wishlist
     const cartdetails = await Cart.findOne({ userId:user }).populate({
       path: "userId",
       path: "cartItems",
       populate: { path: "productId" },
     });
     const order = await Checkout.find({userId:user}).sort({createdAt:-1})
-    const cart = cartdetails.cartItems
+    if(cartdetails){
+     cart = cartdetails.cartItems
+     carts = cartdetails.cartItems.slice(0,2)
+
+    }
     
-    const carts = cartdetails.cartItems.slice(0,2)
   const wish = await Wishlist.findOne({ userId:user }).populate({
       path: "userId",
       path: "wishItems",
       populate: { path: "productId" },
     });
-
-    const wishlist = wish.wishItems
+    if(wish){
+     wishlist = wish.wishItems
+    }
 
 
     res.render('showOrders',{user_details,cart,user,cate,order,carts,wishlist})

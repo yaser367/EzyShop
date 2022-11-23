@@ -168,6 +168,7 @@
                                     <% if(user){ %> 
                                         <a href="/wishlist/show?id=<%=user_details._id%>">
                                             <i class="lni lni-heart"></i>
+                                            <% if(wishlist){ %> 
                                             <% if(wishlist.length > 0 ){ %> 
                                             <span class="total-items"><%=wishlist.length  %></span>
                                             <% }else{ %>
@@ -175,7 +176,7 @@
                                                 
                                                 <% } %> 
                                         </a>
-                                        <% }else{ %>
+                                        <% }}else{ %>
                                         <a href="/login">
                                             <i class="lni lni-heart"></i>
                                             <span class="total-items">0</span>

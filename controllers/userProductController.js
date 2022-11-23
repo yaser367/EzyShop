@@ -14,23 +14,37 @@ const viewProductByCat = async(req,res)=>{
         const allProducts = await productSchema.find().populate("category brand")
         const user = req.session.isAuth
         const user_details = await User.findOne({ _id: req.session.isAuth });
+        let cart;
+        let carts;
+        let wishlist
         if(req.session.isAuth){
-            const id = req.session.isAuth
-            const cartdetails = await Cart.findOne({ userId:id }).populate({
-              path: "userId",
-              path: "cartItems",
-              populate: { path: "productId" },
-            });
-            const cart = cartdetails.cartItems
-        
-              const carts = cartdetails.cartItems.slice(0,2)
-            const wish = await Wishlist.findOne({ userId:id }).populate({
-                path: "userId",
-                path: "wishItems",
-                populate: { path: "productId" },
-              });
-        
-              const wishlist = wish.wishItems
+          const id = req.session.isAuth
+          const cartdetails = await Cart.findOne({ userId:id }).populate({
+            path: "userId",
+            path: "cartItems",
+            populate: { path: "productId" },
+          });
+         if(cartdetails){
+          cart = cartdetails.cartItems
+    
+         }
+          const cartdetail = await Cart.findOne({ userId:id }).populate({
+            path: "userId",
+            path: "cartItems",
+            populate: { path: "productId" },
+          })
+          if(cartdetail){
+          carts = cartdetail.cartItems.slice(0,2)
+    
+          }
+          const wish = await Wishlist.findOne({ userId:id }).populate({
+            path: "userId",
+            path: "wishItems",
+            populate: { path: "productId" },
+          });
+          if(wish){
+           wishlist = wish.wishItems
+          }
            
             res.render('allProducts',{product,allProducts,user,cate,category,category_data,user_details,cart,wishlist,carts})
           
@@ -51,23 +65,37 @@ const oneProduct = async(req,res)=>{
         const id = req.query.id;
         const cate = await categerySchema.find()
         const product = await productSchema.find({_id:id}).populate("category brand") 
+        let cart;
+        let carts;
+        let wishlist
         if(req.session.isAuth){
-            const id = req.session.isAuth
-            const cartdetails = await Cart.findOne({ userId:id }).populate({
-              path: "userId",
-              path: "cartItems",
-              populate: { path: "productId" },
-            });
-            const cart = cartdetails.cartItems
-          
-              const carts = cartdetails.cartItems.slice(0,2)
-            const wish = await Wishlist.findOne({ userId:id }).populate({
-                path: "userId",
-                path: "wishItems",
-                populate: { path: "productId" },
-              });
-        
-              const wishlist = wish.wishItems
+          const id = req.session.isAuth
+          const cartdetails = await Cart.findOne({ userId:id }).populate({
+            path: "userId",
+            path: "cartItems",
+            populate: { path: "productId" },
+          });
+         if(cartdetails){
+          cart = cartdetails.cartItems
+    
+         }
+          const cartdetail = await Cart.findOne({ userId:id }).populate({
+            path: "userId",
+            path: "cartItems",
+            populate: { path: "productId" },
+          })
+          if(cartdetail){
+          carts = cartdetail.cartItems.slice(0,2)
+    
+          }
+          const wish = await Wishlist.findOne({ userId:id }).populate({
+            path: "userId",
+            path: "wishItems",
+            populate: { path: "productId" },
+          });
+          if(wish){
+           wishlist = wish.wishItems
+          }
             res.render('productDetails',{product,cate,user,user_details,carts,wishlist,cart})
           }else{
             res.render('productDetails',{product,cate,user,user_details})

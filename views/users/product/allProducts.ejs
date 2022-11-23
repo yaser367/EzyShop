@@ -174,9 +174,12 @@
                                     <% if(user){ %> 
                                         <a href="/wishlist/show?id=<%=user_details._id%>">
                                             <i class="lni lni-heart"></i>
+                                            <% if(wishlist){ %> 
                                             <% if(wishlist.length > 0 ){ %> 
                                             <span class="total-items"><%=wishlist.length  %></span>
                                             <% }else{ %>
+                                            <span class="total-items">0</span>
+                                            <% }}else{ %>
                                             <span class="total-items">0</span>
                                                 
                                                 <% } %> 
@@ -190,16 +193,18 @@
                                 </div>
                                 <div class="cart-items">
                                     <% if(user){ %> 
-                                    <a href="/cartItems/show?id=<%=user_details._id%>" class="main-btn">
-                                        <i class="lni lni-cart"></i>
-                                        <% if(cart.length > 0 ){%> 
-                                        <span class="total-items"><%=cart.length%></span>
-                                        <% }else{ %>
-                                        <span class="total-items">0</span>
-                                            
-                                            <% } %> 
-                                    </a>
+                                        <a href="/cartItems/show?id=<%=user_details._id%>" class="main-btn">
+                                            <i class="lni lni-cart"></i>
+                                            <% if(cart){ %> 
+                                            <% if(cart.length > 0 ){%> 
+                                            <span class="total-items"><%=cart.length%></span>
+                                            <% }else{ %>
+                                                <span class="total-items">0</span>
+                                                    
+                                                    <% }} %>
+                                        </a>
                                     <!-- Shopping Item -->
+                                    <% if(carts){ %> 
                                     <% if(carts.length > 0){ %> 
                                     <div class="shopping-item">
                                         <div class="dropdown-cart-header">
@@ -247,7 +252,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <% } %> 
+                                    <% }} %> 
                                     <% }else{ %> 
                                         <a href="/login" class="main-btn">
                                             <i class="lni lni-cart"></i>

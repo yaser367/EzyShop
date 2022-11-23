@@ -61,20 +61,25 @@ const showWishlist = async(req,res)=>{
     try {
         const user = req.session.isAuth
         const id = req.query.id;
+        let wishlist;
+        let cart;
+        let carts;
         const wish = await Wishlist.findOne({ userId:id }).populate({
           path: "userId",
           path: "wishItems",
           populate: { path: "productId" },
         });
-  
-        const wishlist = wish.wishItems
+        if(wish){
+         wishlist = wish.wishItems
+        }
         const cartdetails = await Cart.findOne({ userId:id }).populate({
             path: "userId",
             path: "cartItems",
             populate: { path: "productId" },
           });
-    
-        const cart = cartdetails.cartItems
+          if(cartdetails){
+        cart = cartdetails.cartItems
+          }
         const user_details = await User.findOne({ _id: req.session.isAuth });
         const cate = await categories.find()
         const cartdetail = await Cart.findOne({ userId:id }).populate({
@@ -82,7 +87,10 @@ const showWishlist = async(req,res)=>{
             path: "cartItems",
             populate: { path: "productId" },
           })
-          const carts = cartdetail.cartItems.slice(0,2)
+          if(cartdetail){
+          carts = cartdetail.cartItems.slice(0,2)
+
+          }
         res.render('showWishlist',{user,wishlist,cate,user_details,cart,carts})
     } catch (error) {
         console.log(error)
