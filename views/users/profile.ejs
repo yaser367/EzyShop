@@ -114,7 +114,16 @@
                                     </div>
                                 </div>
                                 <div class="search-input">
-                                    <input type="text" placeholder="Search">
+                                    <input type="text" class="search" id="search" placeholder="Search" onkeyup="sendData(this)">
+                                    <section>
+                                        <div style="position: relative;">
+                                            <div style="position: absolute;" id="searchSec">
+
+                                            </div>
+                                        </div>
+                                       
+                                    
+                                    </section>
                                 </div>
                                 <div class="search-btn">
                                     <button><i class="lni lni-search-alt"></i></button>
@@ -156,16 +165,18 @@
                                 </div>
                                 <div class="cart-items">
                                     <% if(user){ %> 
-                                    <a href="/cartItems/show?id=<%=user_details._id%>" class="main-btn">
-                                        <i class="lni lni-cart"></i>
-                                        <% if(cart){ %> 
-                                        <% if(cart.length > 0 ){%> 
-                                        <span class="total-items"><%=cart.length%></span>
-                                        <% }else{ %>
-                                            <span class="total-items">0</span>
-                                                
-                                                <% }} %>
-                                    </a>
+                                        <a href="/cartItems/show?id=<%=user_details._id%>" class="main-btn">
+                                            <i class="lni lni-cart"></i>
+                                            <% if(cart){ %> 
+                                            <% if(cart.length > 0 ){%> 
+                                            <span class="total-items"><%=cart.length%></span>
+                                            <% }else{ %>
+                                                <span class="total-items">0</span>
+                                                    
+                                                    <% }}else{ %>
+                                                <span class="total-items">0</span>
+                                                        <% } %> 
+                                        </a>
                                     <!-- Shopping Item -->
                                     <% if(carts){ %> 
                                     <% if(carts.length > 0){ %> 
@@ -689,6 +700,33 @@
                
         }
     </script>
+         <script>
+            function sendData(e){
+                const searchResult = document.getElementById('searchSec')
+                let match = e.value.match(/\s*/);
+                if(match[0] === e.value){
+                    searchResult.innerHTML = "";
+                    return
+                }
+                fetch('/searchProducts',{
+                    method:'POST',
+                    headers:{'content-type':'application/json'},
+                    body:JSON.stringify({payload:e.value})
+                }).then(res=>res.json()).then(data=>{
+                    let payload = data.payload
+                    searchResult.innerHTML = "";
+                    if(payload.length < 1 ){
+                        searchResult.innerHTML ='<p>Sorry.Nothing found';
+                            return;
+                    }
+                    payload.forEach((items,index)=>{
+                        if(index > 0) searchResult.innerHTML +='<br><br>';
+                        searchResult.innerHTML += `<a href="/product/one?id=${items._id}">${items.productName}</a>`
+                    })
+                    return;
+                })
+            }
+        </script>
  
     <script type="text/javascript">
         //========= Hero Slider 

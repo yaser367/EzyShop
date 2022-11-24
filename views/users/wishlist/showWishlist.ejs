@@ -114,7 +114,16 @@
                                     </div>
                                 </div>
                                 <div class="search-input">
-                                    <input type="text" placeholder="Search">
+                                    <input type="text" class="search" id="search" placeholder="Search" onkeyup="sendData(this)">
+                                    <section>
+                                        <div style="position: relative;">
+                                            <div style="position: absolute;" id="searchSec">
+
+                                            </div>
+                                        </div>
+                                       
+                                    
+                                    </section>
                                 </div>
                                 <div class="search-btn">
                                     <button><i class="lni lni-search-alt"></i></button>
@@ -378,7 +387,10 @@
                     </tr>
                 </tbody>
             </table>
-            <% }}else{ %> 
+            <% }else{%>
+            <p class="mt-3 text-danger text-center">wishlist is empty...</p>
+            <% } %> 
+         <% }else{ %>   %>
             <p class="mt-3 text-danger text-center">wishlist is empty...</p>
                 <% } %> 
         </div>
@@ -546,6 +558,33 @@
             })
         }
     </script>
+         <script>
+            function sendData(e){
+                const searchResult = document.getElementById('searchSec')
+                let match = e.value.match(/\s*/);
+                if(match[0] === e.value){
+                    searchResult.innerHTML = "";
+                    return
+                }
+                fetch('/searchProducts',{
+                    method:'POST',
+                    headers:{'content-type':'application/json'},
+                    body:JSON.stringify({payload:e.value})
+                }).then(res=>res.json()).then(data=>{
+                    let payload = data.payload
+                    searchResult.innerHTML = "";
+                    if(payload.length < 1 ){
+                        searchResult.innerHTML ='<p>Sorry.Nothing found';
+                            return;
+                    }
+                    payload.forEach((items,index)=>{
+                        if(index > 0) searchResult.innerHTML +='<br><br>';
+                        searchResult.innerHTML += `<a href="/product/one?id=${items._id}">${items.productName}</a>`
+                    })
+                    return;
+                })
+            }
+        </script>
     
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/tiny-slider.js"></script>

@@ -194,16 +194,18 @@
                                 </div>
                                 <div class="cart-items">
                                     <% if(user){ %> 
-                                    <a href="/cartItems/show?id=<%=user_details._id%>" class="main-btn">
-                                        <i class="lni lni-cart"></i>
-                                        <% if(cart){ %> 
-                                        <% if(cart.length > 0 ){%> 
-                                        <span class="total-items"><%=cart.length%></span>
-                                        <% }else{ %>
-                                            <span class="total-items">0</span>
-                                                
-                                                <% }} %>
-                                    </a>
+                                        <a href="/cartItems/show?id=<%=user_details._id%>" class="main-btn">
+                                            <i class="lni lni-cart"></i>
+                                            <% if(cart){ %> 
+                                            <% if(cart.length > 0 ){%> 
+                                            <span class="total-items"><%=cart.length%></span>
+                                            <% }else{ %>
+                                                <span class="total-items">0</span>
+                                                    
+                                                    <% }}else{ %>
+                                                <span class="total-items">0</span>
+                                                        <% } %> 
+                                        </a>
                                     <!-- Shopping Item -->
                                     <% if(carts){ %> 
                                     <% if(carts.length > 0){ %> 
