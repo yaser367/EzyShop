@@ -1,2 +1,2 @@
-sample of my project
-<img align="right" alt="Coding" width="400" src="./assets/images/frent.png">
+<p>Sample of my project</p><br>
+<img  alt="" width="100%" src="./assets/images/frent.png">
